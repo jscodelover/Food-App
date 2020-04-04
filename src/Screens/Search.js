@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import SearchBox from '../components/SearchBox';
 
 function Search(props) {
+	const [searchText, setSearchText] = useState('');
+
+	function handleSearch() {
+		alert(searchText);
+	}
+
 	const { navigation } = props;
 	return (
 		<View style={styles.container}>
@@ -12,6 +19,11 @@ function Search(props) {
 			>
 				<Text style={styles.buttonText}>Go to Detail Screen</Text>
 			</TouchableOpacity>
+			<SearchBox
+				searchItem={searchText}
+				onChange={text => setSearchText(text)}
+				handleSubmit={handleSearch}
+			/>
 		</View>
 	);
 }
@@ -21,7 +33,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#ebebeb'
+		backgroundColor: '#fff'
 	},
 	text: {
 		color: '#101010',
