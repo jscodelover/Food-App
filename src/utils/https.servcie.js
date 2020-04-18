@@ -1,5 +1,5 @@
-import getEnvVars from '../../environment';
 import axios from 'axios';
+import getEnvVars from '../../environment';
 
 const REQUEST = config => {
 	const { apiUrl, apiKey } = getEnvVars();

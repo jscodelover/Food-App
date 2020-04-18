@@ -1,22 +1,14 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import SearchBox from '../components/SearchBox';
-import REQUEST from '../utils/https.servcie';
+import useSearch from '../utils/hooks/useSearch';
 
 function Search(props) {
 	const [searchText, setSearchText] = useState('');
-	const [restaurant, setRestaurant] = useState([]);
-
-	async function handleSearch() {
-		const res = await REQUEST({
-			url: `/search?q=${searchText}`,
-			method: 'get'
-		});
-		res.data.restaurants.length && setRestaurant(res.data.restaurants);
-		console.log(res.data.restaurants);
-	}
+	const [restaurant, error, handleSearch] = useSearch();
 
 	const { navigation } = props;
+	console.log('error', error);
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>Search Screen</Text>
@@ -29,9 +21,10 @@ function Search(props) {
 			<SearchBox
 				searchItem={searchText}
 				onChange={text => setSearchText(text)}
-				handleSubmit={handleSearch}
+				handleSubmit={() => handleSearch(searchText)}
 			/>
 			<Text>Search Result : {restaurant.length}</Text>
+			{error && <Text>Error : {error}</Text>}
 		</View>
 	);
 }
