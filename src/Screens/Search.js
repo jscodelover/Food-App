@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import SearchBox from '../components/SearchBox';
-import useSearch from '../utils/hooks/useSearch';
+import { SearchBox } from '../components';
+import { useSearch } from '../utils/hooks';
 
 function Search(props) {
 	const [searchText, setSearchText] = useState('');
 	const [restaurant, error, handleSearch] = useSearch();
 
 	const { navigation } = props;
-	console.log('error', error);
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>Search Screen</Text>
